@@ -10,7 +10,12 @@
         tools:ignore="ProtectedPermissions" />
 
     <application>
-
+        <service
+            android:name="me.carda.awesome_notifications.core.services.ForegroundService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="${foregroundServiceType}"
+            android:stopWithTask="true" />
         <service
             android:name="me.carda.awesome_notifications.core.managers.StatusBarManager"
             android:label="My Notification Listener Service"
