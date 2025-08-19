@@ -28,7 +28,13 @@ public enum ForegroundServiceType implements SafeEnum {
     /// Corresponds to [`ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA`](https://developer.android.com/reference/android/content/pm/ServiceInfo#FOREGROUND_SERVICE_TYPE_CAMERA).
     camera("camera"),
     /// Corresponds to [`ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE`](https://developer.android.com/reference/android/content/pm/ServiceInfo#FOREGROUND_SERVICE_TYPE_MICROPHONE).
-    microphone("microphone");
+    microphone("microphone"),
+    /// Corresponds to [`ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH`](https://developer.android.com/reference/android/content/pm/ServiceInfo#FOREGROUND_SERVICE_TYPE_HEALTH).
+    health("health"),
+    /// Corresponds to [`ServiceInfo.FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING`](https://developer.android.com/reference/android/content/pm/ServiceInfo#FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING).
+    remoteMessaging("remoteMessaging"),
+    /// Corresponds to [`ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED`](https://developer.android.com/reference/android/content/pm/ServiceInfo#FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED).
+    systemExempted("systemExempted");
 
     private final String safeName;
     ForegroundServiceType(final String safeName){
@@ -46,6 +52,9 @@ public enum ForegroundServiceType implements SafeEnum {
             case mediaProjection:   return ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION;
             case microphone:        return ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE;
             case phoneCall:         return ServiceInfo.FOREGROUND_SERVICE_TYPE_PHONE_CALL;
+            case health:            return ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH;
+            case remoteMessaging:   return ServiceInfo.FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING;
+            case systemExempted:    return ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED;
             case none:
             default:
                 return ServiceInfo.FOREGROUND_SERVICE_TYPE_NONE;
@@ -69,7 +78,15 @@ public enum ForegroundServiceType implements SafeEnum {
 //                return candidate;
 //            }
 //        }
-
+        if (SafeEnum.charMatches(reference, stringLength, 0, 'h')){
+            return health;
+        }
+        if (SafeEnum.charMatches(reference, stringLength, 0, 'r')){
+            return remoteMessaging;
+        }
+        if (SafeEnum.charMatches(reference, stringLength, 0, 's')){
+            return systemExempted;
+        }
         if (SafeEnum.charMatches(reference, stringLength, 0, 'p')){
             return phoneCall;
         }
